@@ -9,8 +9,8 @@ import {
     REST,
     Routes,
 } from "discord.js";
-import { Config, config } from "../Config";
-import { Logger } from "../Utils/Logger";
+import { Config, config } from "../Config.js";
+import { Logger } from "../Utils/Logger.js";
 import { readdirSync } from "fs";
 import { set, connect } from "mongoose";
 
@@ -68,8 +68,8 @@ export class Machi extends Client {
         
         this.Logger = new Logger();
         this.config = config;
-        this.loadModules();
-    }
+        // this.loadModules();
+    }/* 
     loadModules() {
         this.loadEvents();
         this.loadCommands();
@@ -171,5 +171,5 @@ export class Machi extends Client {
                 console.error(error);
             }
         };
-    }
+    } */
 }

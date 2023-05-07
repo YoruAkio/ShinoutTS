@@ -1,18 +1,14 @@
 {
-    "compilerOptions": {
-        "target": "ESNext",
-        "module": "commonjs",
-        "baseUrl": ".",
-        "outDir": "dist",
-        "strict": true,
-        "skipLibCheck": true,
-        "paths": {
-            "@root/*": ["./*"],
-            "@commands/*": ["./Commands/*"],
-            "@events/*": ["./Events/*"],
-            "@handlers/*": ["./Structure/*"],
-            "@structures/*": ["./Structures/*"],
-            "@utils/*": ["./Utils/*"]
-        }
-    }
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "rootDir": "./",
+    "outDir": "./dist",
+    "strict": true,
+    "moduleResolution": "nodenext",
+    "useUnknownInCatchVariables": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strictPropertyInitialization": false
+  }
 }

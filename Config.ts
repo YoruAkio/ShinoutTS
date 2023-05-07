@@ -11,6 +11,8 @@ export type Config = {
     prefix: string;
     /* Devs ID */
     devs: string[];
+    /* Bot Token */
+    token: string;
 };
 
 export const config: Config = {
@@ -20,4 +22,5 @@ export const config: Config = {
     databaseUrl: "",
     prefix: "-",
     devs: ["919841186246692886"],
+    token: process.env.TOKEN as string,   
 };
