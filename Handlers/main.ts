@@ -3,13 +3,15 @@ import { config } from "../Config.js";
 import { readdir } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { REST, Routes } from "discord.js";
-import { fileURLToPath } from "node:url"
+import { fileURLToPath } from "node:url";
 import { readdirSync } from "node:fs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 async function builder(commands: unknown[], client: MachiTypes) {
-  const rest = new REST({ version: "10" }).setToken(process.env.TOKEN as string);
+  const rest = new REST({ version: "10" }).setToken(
+    process.env.TOKEN as string
+  );
 
   client.Logger.log(
     "info",
@@ -91,11 +93,18 @@ export default async (client: MachiTypes) => {
     const eventFiles = await readdir(join(__dirname, "../../Events"));
 
     for (const file of eventFiles) {
-      const e = await import(`../../Events/${file}`);
-
-      client.on(e.default.name, (...args) =>
-        e.default.kioEventRun(client, ...args)
+      const eventFolder = await readdir(
+        join(__dirname, `../../Events/${file}`)
       );
+
+      for (const event of eventFolder) {
+        const e = await import(`../../Events/${file}/${event}`);
+
+        client.on(e.default.name, (...args) =>
+          e.default.kioEventRun(client, ...args)
+        );
+        client.Logger.log("info", "Client", `[Event] ${e.default.name} loaded`);
+      }
     }
   } catch (error) {
     client.Logger.log("error", "Client", error);
